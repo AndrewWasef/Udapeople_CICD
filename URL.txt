@@ -1,8 +1,8 @@
 Public Url to GitHub repository (not private) [URL01]
-    https://github.com/Bishoy-Elkes/Udapeople_CICD
+    https://github.com/AndrewWasef/Udapeople_CICD.git
 
 Public URL for your S3 Bucket (aka, your green candidate front-end) [URL02]
-    http://udapeople-67066c9.s3-website-us-east-1.amazonaws.com
+    
 
 Evidence of deployed and functioning Frontend in CloudFront. [URL03]
-    http://ds80lzcy4z7wl.cloudfront.net/#/employees
+    
