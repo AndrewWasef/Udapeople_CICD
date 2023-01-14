@@ -50,7 +50,7 @@ commands:
           name: Revert migrations
           working_directory: ./backend
           command: |
-            SUCCESS=$(curl --insecure "https://kvdb.io/GcvAJSPvEZt4axA4hkbXJ2/migration_<< parameters.id >>")
+            SUCCESS=$(curl --insecure "https://kvdb.io/VfD5cc28MAUJivv3JJ71k9/migration_<< parameters.id >>")
             echo $SUCCESS
             if [[ "$SUCCESS" == "success" ]]
             then
@@ -218,7 +218,7 @@ jobs:
               --output text)
 
             #curl -H "Content-Type: text/plain" -H "token: 564ca3e8-c2c4-40a8-8510-84236d6ddf29" --request PUT --data "http://$BACKEND_IP:3030" https://api.memstash.io/values/BACKEND_URL
-             curl --insecure https://kvdb.io/GcvAJSPvEZt4axA4hkbXJ2/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+             curl --insecure https://kvdb.io/VfD5cc28MAUJivv3JJ71k9/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
       - run:
           name: Deploy frontend infrastructure
           working_directory: ./.circleci/files
@@ -301,9 +301,9 @@ jobs:
           command: |
             if grep -q "has been executed successfully" migration_status
             then
-              curl --insecure https://kvdb.io/GcvAJSPvEZt4axA4hkbXJ2/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+              curl --insecure https://kvdb.io/VfD5cc28MAUJivv3JJ71k9/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             else
-              curl --insecure https://kvdb.io/GcvAJSPvEZt4axA4hkbXJ2/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '0'
+              curl --insecure https://kvdb.io/VfD5cc28MAUJivv3JJ71k9/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '0'
             fi
             echo "WorkflowID=${CIRCLE_WORKFLOW_ID:0:7}"
       - destroy_environment:
@@ -460,7 +460,7 @@ jobs:
               list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
               --no-paginate --output text)
               echo "Work flow ID: $WorkflowID"
-            curl --insecure https://kvdb.io/GcvAJSPvEZt4axA4hkbXJ2/WorkflowID -d "${WorkflowID}"
+            curl --insecure https://kvdb.io/VfD5cc28MAUJivv3JJ71k9/WorkflowID -d "${WorkflowID}"
       - run:
           name: Update cloudfront distribution
           working_directory: ./.circleci/files
@@ -499,7 +499,7 @@ jobs:
                 --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
              echo Stack names: "${CurrentWorkflowID[@]}"
 
-             export OldWorkflowID=$(curl --insecure https://kvdb.io/GcvAJSPvEZt4axA4hkbXJ2/OldWorkflowID)
+             export OldWorkflowID=$(curl --insecure https://kvdb.io/VfD5cc28MAUJivv3JJ71k9/OldWorkflowID)
              echo Old Workflow ID: $OldWorkflowID
 
              if [[ "${CurrentWorkflowID[@]}" =~ "${OldWorkflowID}" ]]
