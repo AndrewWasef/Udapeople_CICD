@@ -194,7 +194,7 @@ jobs:
           working_directory: ./.circleci/files
           command: |
             aws cloudformation deploy \
-              --template-file backend.yml \
+              --template-file backend.yaml \
               --tags project=udapeople \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"
@@ -203,7 +203,7 @@ jobs:
           working_directory: ./.circleci/files
           command: |
             aws cloudformation deploy \
-            --template-file frontend.yml \
+            --template-file frontend.yaml \
             --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} \
             --parameter-overrides ID=${CIRCLE_WORKFLOW_ID:0:7} \
             --tags project=udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
@@ -380,7 +380,7 @@ jobs:
           working_directory: ./.circleci/files/
           command: |
             aws cloudformation deploy \
-              --template-file cloudfront.yml \
+              --template-file cloudfront.yaml \
               --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
               --stack-name InitialStack
       - destroy-environment:
