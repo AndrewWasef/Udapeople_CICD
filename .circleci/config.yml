@@ -199,24 +199,19 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          name: Install awscli
-          command: |
-            sudo apt-get update && sudo apt-get install -y awscli
+      - install_awscli
       - run:
           name: Run migrations
           command: |
-              cd backend
-              npm install
-              npm run migrations > ~/migrations_dump.txt
+            sudo npm i || cat /root/.npm/_logs/2022-*debug.log
+            sudo npm run migrations >> migration_status || sudo cat migration_status
       - run:
-          name: Send migration results to kvdb
-          command: |   
-              if grep -q "has been executed successfully." ~/migrations_dump.txt
-              then
-                # If you are using kvdb.io, generate the bucket ID "AW7yUbjgy6torrQwKs8ASJ" in your local terminal first
-                curl --insecure https://kvdb.io/AW7yUbjgy6torrQwKs8ASJ/migration_$\{CIRCLE_WORKFLOW_ID:0:7\}  -d '1'
-              fi
+          name: Sending migration status to kvdb
+          command: |
+            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
+            then
+            curl http://kvdb.io/F88DbgLVk5taLbCJaYxB3Z/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
+            fi
       - destroy_environment
       - revert_migrations
 
