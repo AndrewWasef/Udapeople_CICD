@@ -431,15 +431,15 @@ jobs:
              else
               exit 1
              fi   
-            #FRONTEND_WEBSITE="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com/#/emplotees"
-            #curl -s ${FRONTEND_WEBSITE} | grep -q "Welcome"
+            FRONTEND_WEBSITE="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com/#/emplotees"
+            curl -s ${FRONTEND_WEBSITE} | grep -q "Welcome"
              
-      #- destroy_environment:
-      #    id: ${CIRCLE_WORKFLOW_ID:0:7}
-      #    when: on_fail
-      #- revert_migrations:
-      #    id: ${CIRCLE_WORKFLOW_ID:0:7}
-      #    when: on_fail
+      - destroy_environment:
+          id: ${CIRCLE_WORKFLOW_ID:0:7}
+          when: on_fail
+      - revert_migrations:
+          id: ${CIRCLE_WORKFLOW_ID:0:7}
+          when: on_fail
 
 
   cloudfront-update:
@@ -512,8 +512,8 @@ jobs:
              else
                echo "$ ==$CurrentWorkflowID => nothing needs to be done..."
              fi
-          #environment:
-            #TERM: xterm-256color
+          environment:
+            TERM: xterm-256color
 
 
 workflows:
