@@ -241,9 +241,9 @@ jobs:
           root: .
           paths:
             - ./.circleci/ansible/inventory
-      # - destroy_environment:
-      #     id: ${CIRCLE_WORKFLOW_ID:0:7}
-      #     when: on_fail
+       - destroy_environment:
+           id: ${CIRCLE_WORKFLOW_ID:0:7}
+           when: on_fail
 
 
   configure-infrastructure:
@@ -579,4 +579,3 @@ workflows:
           requires:
             - cloudfront-update
 
-# VS Code Extension Version: 1.3.0
