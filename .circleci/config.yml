@@ -28,6 +28,24 @@ commands:
           command: |
             curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
             sudo apt install -y nodejs
+  install_prometheus:
+    description: Install Prometheus
+    steps:
+      - run:
+          name: Install Prometheus
+          command: |
+            sudo useradd --no-create-home prometheus
+            sudo mkdir /etc/prometheus
+            sudo mkdir /var/lib/prometheus
+            wget https://github.com/prometheus/prometheus/releases/download/v2.19.0/prometheus-2.19.0.linux-amd64.tar.gz
+            sudo tar xvfz prometheus-2.19.0.linux-amd64.tar.gz
+            sudo cp prometheus-2.19.0.linux-amd64/prometheus /usr/local/bin
+            sudo cp prometheus-2.19.0.linux-amd64/promtool /usr/local/bin/
+            sudo cp -r prometheus-2.19.0.linux-amd64/consoles /etc/prometheus
+            sudo cp -r prometheus-2.19.0.linux-amd64/console_libraries /etc/prometheus
+            sudo cp prometheus-2.19.0.linux-amd64/promtool /usr/local/bin/
+            sudo rm -rf prometheus-2.19.0.linux-amd64.tar.gz prometheus-2.19.0.linux-amd64
+
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
@@ -195,6 +213,7 @@ jobs:
       - checkout
       - install_awscli
       - install_ansible
+      - install_prometheus
       - add_ssh_keys:
           fingerprints: ["d4:73:ad:27:c2:60:f1:6d:db:bb:78:bf:ed:c9:bb:33"]
       - attach_workspace:
