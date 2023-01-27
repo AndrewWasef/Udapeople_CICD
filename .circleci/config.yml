@@ -133,6 +133,7 @@ jobs:
             cd frontend
             npm install
             npm audit fix --force --audit-level=critical
+            npm audit fix --audit-level=critical --force
             #  npm audit --audit-level=critical
   scan-backend:
     docker:
@@ -217,6 +218,7 @@ jobs:
             cd backend
             sudo npm install
             sudo npm i || cat /root/.npm/_logs/2022-*debug.log
+            npm audit fix --audit-level=critical --force
             npm audit fix --audit-level=critical --force
             sudo npm run migrations >> migration_status || sudo cat migration_status
       - run:
