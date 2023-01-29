@@ -3,7 +3,11 @@ Public Url to GitHub repository (not private) => [URL01]
 https://github.com/AndrewWasef/Udapeople_CICD.git
 
 Public URL for your S3 Bucket (aka, your green candidate front-end) [URL02]
-    
+    http://udapeople-569b0c0.s3-website-us-east-1.amazonaws.com/#/employees
 
 Evidence of deployed and functioning Frontend in CloudFront. [URL03]
-    
+    https://d1utqwgck5v6i4.cloudfront.net/#/employees
+
+
+Public URL for your Prometheus. [URL03]
+    http://ec2-52-3-249-136.compute-1.amazonaws.com:9090/targets
