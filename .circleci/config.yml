@@ -115,13 +115,12 @@ jobs:
           name: npm run build
           working_directory: ./backend
           command: 
-            mkdir dist
             npm install
             npm run build
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ./backend/dist
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #       - ./backend/dist
   test-frontend:
     docker:
       - image: cimg/node:13.8.0
