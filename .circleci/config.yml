@@ -114,7 +114,9 @@ jobs:
       - run:
           name: npm run build
           working_directory: ./backend
-          command: npm run build
+          command: 
+            npm install
+            npm run build
       - persist_to_workspace:
           root: .
           paths:
