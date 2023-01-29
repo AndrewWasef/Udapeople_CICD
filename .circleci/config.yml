@@ -106,21 +106,22 @@ jobs:
           paths:
             - backend/node_modules
   build-backend:
-    docker:
-      - image: cimg/node:13.8.0
+    executor: node
     steps:
       - checkout
-      - restore_cache:
-          keys: [backend-deps]
+      - attach_workspace:
+          at: .
       - run:
-          name: Back-end build
-          command: |
-            cd backend
+          name: npm run build
+          working_directory: ./backend
+          command: 
+            mkdir dist
             npm install
             npm run build
-      - save_cache:
-          paths: [backend/node_modules]
-          key: backend-deps
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./backend/dist
   test-frontend:
     docker:
       - image: cimg/node:13.8.0
